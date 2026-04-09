@@ -116,7 +116,7 @@ jobs:
         echo "Freed disk space: $(df -h / | tail -1 | awk '{print $4}') available"
 
     - name: create dmg
-      if: startsWith(github.ref, 'refs/tags/') || contains(github.event.head_commit.message, '[beta]')
+      if: startsWith(github.ref, 'refs/tags/') || contains(github.event.head_commit.message, '[beta]') || github.event_name == 'workflow_dispatch'
       run: |
         echo "Checking for ClashX.app..."
         ls -la ClashX.app
@@ -149,6 +149,13 @@ jobs:
           echo "Error: DMG creation failed!"
           exit 1
         fi
+
+    - name: upload dmg artifact
+      if: github.event_name == 'workflow_dispatch'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ClashX-dev
+        path: ClashX.dmg
 
     - name: sign dmg with sparkle
       if: startsWith(github.ref, 'refs/tags/')
