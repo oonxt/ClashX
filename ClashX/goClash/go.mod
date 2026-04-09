@@ -1,8 +1,6 @@
 module github.com/yichengchen/clashX/ClashX
 
-go 1.21
-
-toolchain go1.21.0
+go 1.23.1
 
 require (
 	github.com/Dreamacro/clash v1.18.1-0.20230911035213-d034a408be42
@@ -13,6 +11,7 @@ require (
 require (
 	github.com/Dreamacro/protobytes v0.0.0-20230617041236-6500a9f4f158 // indirect
 	github.com/ajg/form v1.5.1 // indirect
+	github.com/anytls/sing-anytls v0.0.11 // indirect
 	github.com/dlclark/regexp2 v1.10.0 // indirect
 	github.com/go-chi/chi/v5 v5.0.10 // indirect
 	github.com/go-chi/cors v1.2.1 // indirect
@@ -27,6 +26,7 @@ require (
 	github.com/miekg/dns v1.1.55 // indirect
 	github.com/oschwald/maxminddb-golang v1.11.0 // indirect
 	github.com/pierrec/lz4/v4 v4.1.14 // indirect
+	github.com/sagernet/sing v0.6.1 // indirect
 	github.com/samber/lo v1.38.1 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/u-root/uio v0.0.0-20230220225925-ffce2a382923 // indirect
@@ -39,8 +39,10 @@ require (
 	golang.org/x/mod v0.8.0 // indirect
 	golang.org/x/net v0.14.0 // indirect
 	golang.org/x/sync v0.3.0 // indirect
-	golang.org/x/sys v0.11.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/text v0.12.0 // indirect
 	golang.org/x/tools v0.6.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+replace github.com/Dreamacro/clash => ./clash-fork
