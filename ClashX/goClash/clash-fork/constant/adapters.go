@@ -23,6 +23,7 @@ const (
 	Vmess
 	Trojan
 	AnyTLS
+	Hysteria2
 
 	Relay
 	Selector
@@ -150,6 +151,8 @@ func (at AdapterType) String() string {
 		return "Trojan"
 	case AnyTLS:
 		return "AnyTLS"
+	case Hysteria2:
+		return "Hysteria2"
 
 	case Relay:
 		return "Relay"

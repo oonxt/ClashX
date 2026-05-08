@@ -28,6 +28,7 @@ enum ClashProxyType: String, Codable {
     case wireguard = "Wireguard"
     case vless = "Vless"
     case anytls = "AnyTLS"
+    case hysteria2 = "Hysteria2"
 
     static let proxyGroups: [ClashProxyType] = [.select, .urltest, .fallback, .loadBalance]
 

@@ -1,9 +1,9 @@
 module github.com/yichengchen/clashX/ClashX
 
-go 1.23.1
+go 1.24.0
 
 require (
-	github.com/Dreamacro/clash v1.18.1-0.20230911035213-d034a408be42
+	github.com/Dreamacro/clash v0.0.0-00010101000000-000000000000
 	github.com/oschwald/geoip2-golang v1.9.0
 	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 )
@@ -16,8 +16,8 @@ require (
 	github.com/go-chi/chi/v5 v5.0.10 // indirect
 	github.com/go-chi/cors v1.2.1 // indirect
 	github.com/go-chi/render v1.0.3 // indirect
-	github.com/gofrs/uuid/v5 v5.0.0 // indirect
-	github.com/google/go-cmp v0.5.9 // indirect
+	github.com/gofrs/uuid/v5 v5.3.2 // indirect
+	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/insomniacslk/dhcp v0.0.0-20230816195147-b3ca2534940d // indirect
 	github.com/josharian/native v1.1.0 // indirect
@@ -26,7 +26,10 @@ require (
 	github.com/miekg/dns v1.1.55 // indirect
 	github.com/oschwald/maxminddb-golang v1.11.0 // indirect
 	github.com/pierrec/lz4/v4 v4.1.14 // indirect
-	github.com/sagernet/sing v0.6.1 // indirect
+	github.com/quic-go/qpack v0.6.0 // indirect
+	github.com/sagernet/quic-go v0.59.0-sing-box-mod.2 // indirect
+	github.com/sagernet/sing v0.8.9 // indirect
+	github.com/sagernet/sing-quic v0.6.1 // indirect
 	github.com/samber/lo v1.38.1 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/u-root/uio v0.0.0-20230220225925-ffce2a382923 // indirect
@@ -34,14 +37,14 @@ require (
 	github.com/vishvananda/netns v0.0.0-20200728191858-db3c7e526aae // indirect
 	go.etcd.io/bbolt v1.3.7 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
-	golang.org/x/crypto v0.12.0 // indirect
-	golang.org/x/exp v0.0.0-20220303212507-bbda1eaf7a17 // indirect
-	golang.org/x/mod v0.8.0 // indirect
-	golang.org/x/net v0.14.0 // indirect
-	golang.org/x/sync v0.3.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/text v0.12.0 // indirect
-	golang.org/x/tools v0.6.0 // indirect
+	golang.org/x/crypto v0.42.0 // indirect
+	golang.org/x/exp v0.0.0-20250911091902-df9299821621 // indirect
+	golang.org/x/mod v0.28.0 // indirect
+	golang.org/x/net v0.44.0 // indirect
+	golang.org/x/sync v0.17.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
+	golang.org/x/text v0.29.0 // indirect
+	golang.org/x/tools v0.37.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 

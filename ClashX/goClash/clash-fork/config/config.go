@@ -117,7 +117,7 @@ type RawDNS struct {
 	FakeIPRange       string            `yaml:"fake-ip-range"`
 	FakeIPFilter      []string          `yaml:"fake-ip-filter"`
 	DefaultNameserver []string          `yaml:"default-nameserver"`
-	NameServerPolicy  map[string]string `yaml:"nameserver-policy"`
+	NameServerPolicy  map[string]any    `yaml:"nameserver-policy"`
 	SearchDomains     []string          `yaml:"search-domains"`
 }
 
@@ -595,18 +595,51 @@ func parseNameServer(servers []string) ([]dns.NameServer, error) {
 	return nameservers, nil
 }
 
-func parseNameServerPolicy(nsPolicy map[string]string) (map[string]dns.NameServer, error) {
+func parseNameServerPolicy(nsPolicy map[string]any) (map[string]dns.NameServer, error) {
 	policy := map[string]dns.NameServer{}
 
-	for domain, server := range nsPolicy {
-		nameservers, err := parseNameServer([]string{server})
-		if err != nil {
-			return nil, err
+	for domain, raw := range nsPolicy {
+		var servers []string
+		switch v := raw.(type) {
+		case string:
+			servers = []string{v}
+		case []any:
+			for i, item := range v {
+				s, ok := item.(string)
+				if !ok {
+					return nil, fmt.Errorf("DNS NameServerPolicy[%s][%d] must be a string", domain, i)
+				}
+				servers = append(servers, s)
+			}
+		default:
+			return nil, fmt.Errorf("DNS NameServerPolicy[%s] must be a string or list of strings", domain)
+		}
+
+		// Drop schemes the fork can't use (e.g. "system") so mihomo-style
+		// configs still load; we keep the first usable nameserver for the domain
+		// since dns.Resolver only consumes one entry per policy.
+		var picked *dns.NameServer
+		for _, s := range servers {
+			if strings.EqualFold(s, "system") {
+				log.Warnln("DNS NameServerPolicy[%s]: skipping unsupported 'system' nameserver", domain)
+				continue
+			}
+			parsed, err := parseNameServer([]string{s})
+			if err != nil {
+				log.Warnln("DNS NameServerPolicy[%s]: skipping %q: %v", domain, s, err)
+				continue
+			}
+			ns := parsed[0]
+			picked = &ns
+			break
+		}
+		if picked == nil {
+			return nil, fmt.Errorf("DNS NameServerPolicy[%s] has no usable nameserver", domain)
 		}
 		if _, valid := trie.ValidAndSplitDomain(domain); !valid {
 			return nil, fmt.Errorf("DNS ResoverRule invalid domain: %s", domain)
 		}
-		policy[domain] = nameservers[0]
+		policy[domain] = *picked
 	}
 
 	return policy, nil

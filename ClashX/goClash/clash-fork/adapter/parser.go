@@ -87,6 +87,13 @@ func ParseProxy(mapping map[string]any) (C.Proxy, error) {
 			break
 		}
 		proxy, err = outbound.NewAnyTLS(*anytlsOption)
+	case "hysteria2":
+		hy2Option := &outbound.Hysteria2Option{}
+		err = decoder.Decode(mapping, hy2Option)
+		if err != nil {
+			break
+		}
+		proxy, err = outbound.NewHysteria2(*hy2Option)
 	default:
 		return nil, fmt.Errorf("unsupport proxy type: %s", proxyType)
 	}
